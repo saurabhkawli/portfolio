@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movies &amp; Music — Saurabh Kawli</title>
+  <meta name="description" content="Iron Man, Marvel, Harry Potter, Wall-E, Naruto, Pokémon, Breaking Bad, Peaky Blinders, Sherlock — and one favourite song." />
+  <meta name="theme-color" content="#07070a" />
+  <meta property="og:title" content="Movies &amp; Music — Saurabh Kawli" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@500;600;700&family=Cinzel:wght@500;700&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&display=swap&text=Universe" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/core.css" />
+  <link rel="stylesheet" href="assets/css/movies.css" />
+  <script>
+    document.documentElement.classList.add("js");
+    try { var p = JSON.parse(sessionStorage.getItem("sk-pt")); if (p) { var d = document.documentElement; d.classList.add("pt-enter"); d.style.setProperty("--pt-color", p.color || "#07070a"); d.style.setProperty("--pt-ink", p.ink || "#e8b04a"); } } catch (e) {}
+  </script>
+</head>
+<body class="page-movies">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Film leader countdown -->
+  <div class="leader" data-leader aria-hidden="true" hidden>
+    <div class="leader__frame">
+      <div class="leader__sweep"></div>
+      <svg class="leader__dial" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="96" /><circle cx="100" cy="100" r="80" />
+        <path d="M100 -60V260M-120 100H320" />
+      </svg>
+      <span class="leader__num" data-leader-num>3</span>
+    </div>
+    <span class="leader__skip">Click to skip</span>
+  </div>
+
+  <header class="page-chrome">
+    <a class="chrome-link" href="index.html#beyond" data-pt-color="#05060a" data-pt-label="Universe">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>Universe
+    </a>
+    <a class="chrome-link" href="astronomy.html" data-pt-color="#02030a" data-pt-ink="#e9e4d8" data-pt-label="Astronomy">
+      Back to the stars<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+    </a>
+  </header>
+
+  <main id="main">
+    <!-- ============ Marquee hero ============ -->
+    <section class="m-hero" data-m-hero>
+      <div class="m-hero__beam" aria-hidden="true"></div>
+      <div class="curtain curtain--l" aria-hidden="true"></div>
+      <div class="curtain curtain--r" aria-hidden="true"></div>
+      <div class="m-hero__valance" aria-hidden="true"></div>
+      <div class="marquee-sign">
+        <div class="bulbs" aria-hidden="true"></div>
+        <p class="marquee-sign__now">Now showing · Room v</p>
+        <h1 class="marquee-sign__title" data-m-title>Movies <em>&amp;</em> Music</h1>
+        <p class="marquee-sign__sub">Lights down. Volume up. Phone on silent.</p>
+      </div>
+      <div class="m-hero__seats" aria-hidden="true"></div>
+    </section>
+
+    <!-- ============ Iron Man / JARVIS ============ -->
+    <section class="jarvis" data-jarvis>
+      <div class="m-wrap jarvis__grid">
+        <div class="jarvis__copy">
+          <span class="m-label m-label--cyan">01 · All-time favourite hero</span>
+          <h2 class="jarvis__title" data-reveal="words">I am <em>Iron Man.</em></h2>
+          <p data-reveal>Die-hard Iron Man fan, no contest. A genius who builds his way out of a cave with a box of scraps — and keeps building until he can save the universe. Every engineer's favourite superhero, and definitely this tester's.</p>
+          <ul class="hud-stats" data-reveal>
+            <li><span>Fan level</span><b>Die-hard</b><i style="--v:1"></i></li>
+            <li><span>Times “I love you 3000” hit hard</span><b>3000</b><i style="--v:0.96"></i></li>
+            <li><span>Suits in the head-canon armoury</span><b>85</b><i style="--v:0.85"></i></li>
+          </ul>
+          <blockquote class="jarvis__quote">“Sometimes you gotta run before you can walk.”</blockquote>
+        </div>
+        <div class="hud-col">
+        <div class="hud" data-cursor="Power up">
+          <svg class="hud__ticks" viewBox="0 0 400 400" aria-hidden="true">
+            <circle cx="200" cy="200" r="190" class="t1" /><circle cx="200" cy="200" r="172" class="t2" /><circle cx="200" cy="200" r="150" class="t3" />
+            <path d="M200 0v26M200 374v26M0 200h26M374 200h26" class="t4" />
+          </svg>
+          <button class="reactor" type="button" data-reactor aria-label="Power up the arc reactor">
+            <span class="reactor__ring reactor__ring--1"></span>
+            <span class="reactor__ring reactor__ring--2"></span>
+            <span class="reactor__ring reactor__ring--3"></span>
+            <span class="reactor__core"></span>
+          </button>
+          <span class="hud__tag hud__tag--tl">MARK LXXXV</span>
+          <span class="hud__tag hud__tag--tr">PWR <b data-power>100</b>%</span>
+          <span class="hud__tag hud__tag--bl">J.A.R.V.I.S.</span>
+          <span class="hud__tag hud__tag--br">TAP CORE</span>
+        </div>
+        <ol class="hud__console" data-console aria-live="polite"><li>&gt; Systems nominal. Tap the core, sir.</li></ol>
+        </div>
+      </div>
+      <div class="reticle" aria-hidden="true"><i></i></div>
+    </section>
+
+    <!-- ============ Universes: Marvel & Harry Potter ============ -->
+    <section class="universes">
+      <div class="m-wrap">
+        <header class="m-head">
+          <span class="m-label">02 · Favourite movie series</span>
+          <h2 data-reveal="words">Two universes. <em>Zero regrets.</em></h2>
+        </header>
+        <div class="uni-grid">
+          <article class="uni uni--marvel" data-reveal>
+            <span class="uni__tag">The Marvel Cinematic Universe</span>
+            <h3>Marvel</h3>
+            <p>Every phase, every post-credit scene, every “On your left.” Collect all six — hover the stones.</p>
+            <div class="stones" role="list">
+              <button class="stone" role="listitem" style="--c:#3b7dff" data-stone="Space Stone · Tesseract"><span class="sr-only">Space</span></button>
+              <button class="stone" role="listitem" style="--c:#ffd23b" data-stone="Mind Stone · Vision"><span class="sr-only">Mind</span></button>
+              <button class="stone" role="listitem" style="--c:#ff3b3b" data-stone="Reality Stone · Aether"><span class="sr-only">Reality</span></button>
+              <button class="stone" role="listitem" style="--c:#a63bff" data-stone="Power Stone · Orb"><span class="sr-only">Power</span></button>
+              <button class="stone" role="listitem" style="--c:#3bff8a" data-stone="Time Stone · Eye of Agamotto"><span class="sr-only">Time</span></button>
+              <button class="stone" role="listitem" style="--c:#ff8a3b" data-stone="Soul Stone · Vormir"><span class="sr-only">Soul</span></button>
+            </div>
+            <p class="stones__label" data-stone-label aria-live="polite">0 / 6 collected</p>
+          </article>
+          <article class="uni uni--hp" data-reveal data-delay="0.12" data-hp>
+            <svg class="hp__bolt" viewBox="0 0 60 100" aria-hidden="true"><path d="M34 0 L8 54 H28 L18 100 L54 38 H32 Z" /></svg>
+            <span class="uni__tag">The Wizarding World</span>
+            <h3>Harry Potter</h3>
+            <p>Still waiting for my Hogwarts letter. Owl must be stuck in traffic. Cast a spell:</p>
+            <div class="spells">
+              <button type="button" data-spell="lumos">Lumos</button>
+              <button type="button" data-spell="leviosa">Wingardium Leviosa</button>
+              <button type="button" data-spell="map">I solemnly swear…</button>
+            </div>
+            <div class="hp__map" aria-hidden="true">
+              <span style="--x:8%;--y:70%;--d:0s"></span><span style="--x:16%;--y:60%;--d:.3s"></span><span style="--x:25%;--y:66%;--d:.6s"></span>
+              <span style="--x:34%;--y:54%;--d:.9s"></span><span style="--x:44%;--y:60%;--d:1.2s"></span><span style="--x:54%;--y:48%;--d:1.5s"></span>
+              <span style="--x:64%;--y:54%;--d:1.8s"></span><span style="--x:74%;--y:42%;--d:2.1s"></span><span style="--x:84%;--y:48%;--d:2.4s"></span>
+            </div>
+            <p class="hp__msg" data-hp-msg aria-live="polite"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Wall-E ============ -->
+    <section class="walle-sec" data-walle>
+      <div class="m-wrap walle__grid">
+        <div>
+          <span class="m-label m-label--sun">03 · Best animated film</span>
+          <h2 data-reveal="words">Wall-E.</h2>
+          <p data-reveal>A lonely little robot, a single green plant, and a love story told almost without words. It's the film that convinced me the smallest machine can have the biggest heart — and that a plant in an old boot can change the world. (The farmer in me approves.)</p>
+        </div>
+        <div class="walle__scene" aria-hidden="true">
+          <div class="walle__track">
+            <svg class="walle" viewBox="0 0 160 160">
+              <rect x="18" y="110" width="52" height="34" rx="15" fill="#2f2f33" /><rect x="90" y="110" width="52" height="34" rx="15" fill="#2f2f33" />
+              <g class="walle__treads" fill="#55555c"><circle cx="34" cy="127" r="6" /><circle cx="54" cy="127" r="6" /><circle cx="106" cy="127" r="6" /><circle cx="126" cy="127" r="6" /></g>
+              <rect x="36" y="62" width="88" height="58" rx="4" fill="#d9a441" /><rect x="42" y="70" width="42" height="12" rx="2" fill="#b07a22" />
+              <rect x="42" y="88" width="76" height="4" fill="#b07a22" /><circle cx="108" cy="77" r="5" fill="#c0392b" />
+              <rect x="22" y="80" width="16" height="9" rx="2" fill="#8a8a90" /><rect x="122" y="80" width="16" height="9" rx="2" fill="#8a8a90" />
+              <rect x="76" y="40" width="8" height="24" fill="#8a8a90" />
+              <g class="walle__eyes">
+                <rect x="50" y="18" width="28" height="24" rx="10" fill="#7d8792" /><rect x="82" y="18" width="28" height="24" rx="10" fill="#7d8792" />
+                <circle cx="64" cy="30" r="7.5" fill="#15181d" /><circle cx="96" cy="30" r="7.5" fill="#15181d" />
+                <circle cx="66.5" cy="27.5" r="2.2" fill="#fff" /><circle cx="98.5" cy="27.5" r="2.2" fill="#fff" />
+              </g>
+            </svg>
+            <svg class="boot" viewBox="0 0 60 70"><path d="M14 30 V60 H52 V50 C52 44 44 42 36 40 V30Z" fill="#5a3b24" /><path d="M27 30 C26 22 27 14 30 8" fill="none" stroke="#4a8a2c" stroke-width="3" stroke-linecap="round" /><path d="M29 18 C22 12 15 14 12 19 C19 22 25 21 29 18Z M30 13 C36 6 43 6 47 10 C41 14 35 15 30 13Z" fill="#6ab33f" /></svg>
+            <span class="walle__say">Eeee-vah?</span>
+          </div>
+          <svg class="eve" viewBox="0 0 80 120"><ellipse cx="40" cy="34" rx="30" ry="26" fill="#f4f7fb" /><rect x="16" y="22" width="48" height="22" rx="11" fill="#0d1520" /><ellipse cx="30" cy="33" rx="6" ry="3.5" fill="#6fd0ff" /><ellipse cx="50" cy="33" rx="6" ry="3.5" fill="#6fd0ff" /><path d="M14 64 C14 52 66 52 66 64 C66 92 52 112 40 112 C28 112 14 92 14 64Z" fill="#f4f7fb" /></svg>
+          <span class="walle__heart">❤</span>
+          <div class="walle__ground"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Anime ============ -->
+    <section class="anime">
+      <div class="m-wrap">
+        <header class="m-head">
+          <span class="m-label m-label--orange">04 · Anime</span>
+          <h2 data-reveal="words">Believe it. <em>Gotta catch 'em all.</em></h2>
+        </header>
+        <div class="anime__grid">
+          <article class="naruto" data-reveal data-clone>
+            <svg class="leaf-sym" viewBox="0 0 100 100" aria-hidden="true"><path d="M14 16 L46 30 C72 26 90 44 86 66 C82 86 58 94 40 84 C24 75 24 52 40 46 C52 42 62 50 60 60 C58 67 50 69 46 64" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            <span class="uni__tag">Hidden Leaf Village</span>
+            <h3>Naruto</h3>
+            <p>The loud kid nobody believed in, who never gave up on his dream — or his friends. Hover for a shadow clone jutsu. Dattebayo!</p>
+            <span class="clone clone--1" aria-hidden="true"></span><span class="clone clone--2" aria-hidden="true"></span>
+          </article>
+          <article class="poke" data-reveal data-delay="0.12">
+            <button class="pokeball" type="button" data-pokeball aria-label="Open the Pokéball">
+              <span class="pokeball__top"></span><span class="pokeball__bottom"></span><span class="pokeball__btn"></span>
+            </button>
+            <div class="poke__reveal" data-poke-reveal>
+              <span class="poke__fire" aria-hidden="true">🔥</span>
+              <b>Charizard</b>
+              <span>used Flamethrower. It's super effective!</span>
+            </div>
+            <span class="uni__tag">Pokémon</span>
+            <h3>Pokémon</h3>
+            <p>Charizard is the best. Fight me. <small>PS: Pikachu is loved by all :P <span class="pika" aria-hidden="true">⚡</span></small></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Favourite actors ============ -->
+    <section class="actors">
+      <div class="m-wrap">
+        <header class="m-head">
+          <span class="m-label">05 · Favourite heroes, off-screen too</span>
+          <h2 data-reveal="words">Two legends, <em>one rule: be original.</em></h2>
+        </header>
+        <div class="actor-grid">
+          <article class="poster poster--jack" data-reveal data-compass-card>
+            <div class="poster__bg" aria-hidden="true"></div>
+            <span class="poster__billing">And introducing… Captain</span>
+            <h3>Johnny<br />Depp</h3>
+            <div class="compass" aria-hidden="true">
+              <span class="compass__n">N</span>
+              <i class="compass__needle" data-needle></i>
+            </div>
+            <p>As Captain Jack Sparrow — the most gloriously chaotic pirate ever. His compass doesn't point north; it points to the thing you want most. <span class="compass__note" data-compass-note>Move your cursor around it.</span></p>
+            <blockquote>“Why is the rum gone?”</blockquote>
+          </article>
+          <article class="poster poster--rdj" data-reveal data-delay="0.12">
+            <div class="poster__bg" aria-hidden="true"></div>
+            <span class="poster__billing">Starring</span>
+            <h3>Robert<br />Downey Jr.</h3>
+            <ul class="poster__roles"><li>Iron Man</li><li>Sherlock Holmes</li><li>Chaplin</li></ul>
+            <p>The man who <em>became</em> Tony Stark — and also played Sherlock Holmes. Two of my favourite characters, one actor. Coincidence? I think not.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Series ============ -->
+    <section class="series">
+      <div class="m-wrap">
+        <header class="m-head">
+          <span class="m-label m-label--green">06 · Best series</span>
+          <h2 data-reveal="words">Binge-worthy, <em>re-watch certified.</em></h2>
+        </header>
+        <div class="series-grid">
+          <article class="show show--bb" data-reveal>
+            <div class="elements" aria-hidden="true"><span><small>35</small>Br</span><span><small>56</small>Ba</span></div>
+            <h3>Breaking Bad</h3>
+            <p>A chemistry teacher, a pork-pie hat and the greatest character arc in television.</p>
+            <blockquote>“Say my name.”</blockquote>
+          </article>
+          <article class="show show--peaky" data-reveal data-delay="0.1">
+            <span class="show__kicker">Birmingham · 1919</span>
+            <h3>Peaky<br />Blinders</h3>
+            <p>Flat caps, razor blades, slow-motion walks and that soundtrack.</p>
+            <blockquote>“By order of the Peaky Blinders.”</blockquote>
+          </article>
+          <article class="show show--sherlock" data-reveal data-delay="0.2" data-miss tabindex="0" data-cursor="Miss me?">
+            <span class="show__kicker">221B Baker Street</span>
+            <h3>Sherlock</h3>
+            <p>Brilliant, rude and always three steps ahead. Which leaves just one question…</p>
+            <p class="show__ask">Will Moriarty come back!!!</p>
+            <span class="miss" aria-hidden="true">Did you miss me?</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Music ============ -->
+    <section class="music">
+      <div class="m-wrap music__grid">
+        <div class="turntable" data-turntable>
+          <div class="platter">
+            <div class="vinyl" data-vinyl>
+              <div class="vinyl__label"><span>Something<br />Just Like This</span></div>
+            </div>
+          </div>
+          <div class="tonearm" aria-hidden="true"><span class="tonearm__head"></span></div>
+          <button class="turntable__play" type="button" data-play aria-pressed="false"><span data-play-label>Drop the needle</span></button>
+        </div>
+        <div class="music__copy">
+          <span class="m-label">07 · Favourite music</span>
+          <h2 data-reveal="words">Something <em>Just Like This.</em></h2>
+          <p class="music__by">The Chainsmokers &amp; Coldplay</p>
+          <p data-reveal>A song about not needing a superhero — chosen as all-time favourite by a die-hard Iron Man fan. The irony is not lost on me. It's on repeat anyway.</p>
+          <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="music__note">No audio here — copyright is the real villain. The real song is one click away:</p>
+          <div class="music__links">
+            <a class="btn" href="https://open.spotify.com/search/Something%20Just%20Like%20This" target="_blank" rel="noopener" data-no-transition>Listen on Spotify ↗</a>
+            <a class="btn" href="https://www.youtube.com/results?search_query=Something+Just+Like+This+Chainsmokers+Coldplay" target="_blank" rel="noopener" data-no-transition>Watch on YouTube ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ End credits ============ -->
+    <section class="credits" data-credits>
+      <div class="credits__roll">
+        <p class="credits__big">A Saurabh Kawli production</p>
+        <dl data-reveal="stagger">
+          <div><dt>Written, tested &amp; directed by</dt><dd>Saurabh Kawli</dd></div>
+          <div><dt>Starring</dt><dd>Iron Man · Harry Potter · Wall-E</dd></div>
+          <div><dt>Guest appearances</dt><dd>Naruto Uzumaki · Charizard · Pikachu</dd></div>
+          <div><dt>Supporting cast</dt><dd>Walter White · Thomas Shelby · Sherlock Holmes</dd></div>
+          <div><dt>Special appearance</dt><dd>Captain Jack Sparrow — there should be a “Captain” in there somewhere</dd></div>
+          <div><dt>Original song</dt><dd>“Something Just Like This”</dd></div>
+          <div><dt>Visual effects</dt><dd>GSAP · WebGL · a lot of coffee</dd></div>
+          <div><dt>Special thanks</dt><dd>You — for watching till the end</dd></div>
+        </dl>
+        <p class="credits__end">The End</p>
+        <p class="credits__q">…or is it?</p>
+      </div>
+    </section>
+
+    <a class="next-hobby" href="index.html#beyond" data-pt-color="#05060a" data-pt-label="Universe" data-cursor="Enter">
+      <span class="next-hobby__label">That's a wrap</span>
+      <span class="next-hobby__title">Back to the Universe</span>
+      <span class="next-hobby__all">Or keep scrolling. True fans know. →</span>
+    </a>
+
+    <!-- ============ Post-credit scene ============ -->
+    <section class="postcredit" data-postcredit>
+      <div class="postcredit__inner">
+        <p class="postcredit__label">Post-credit scene</p>
+        <p class="postcredit__line" data-pc-line>A dark room. A single desk lamp flickers on.</p>
+        <p class="postcredit__line" data-pc-line>On the desk: a telescope, a field journal, two boarding passes stamped <em>“not yet printed”</em>.</p>
+        <p class="postcredit__line" data-pc-line>A hand slides a note across the table. It has a strange mark on it.</p>
+        <button class="sigil postcredit__sigil" data-fragment="movie-credits"></button>
+        <p class="postcredit__return" data-pc-line>Saurabh Kawli will return.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script src="assets/js/site-config.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/cipher.js"></script>
+  <script src="assets/js/movies.js"></script>
+</body>
+</html>

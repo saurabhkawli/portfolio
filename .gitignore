@@ -1,0 +1,11 @@
+# Original photos: large, and they carry GPS/EXIF metadata. The site uses the
+# stripped, web-sized copies in assets/img/ instead.
+/Adventure/
+/Astronomy/
+/Rajasthan/
+
+/.idea/
+
+Thumbs.db
+desktop.ini
+.DS_Store
