@@ -8,4 +8,10 @@ window.SITE_CONFIG = {
   linkedin: "https://www.linkedin.com/in/your-linkedin-handle",
   github: "https://github.com/saurabhkawli",
   location: "India",
+  /* Free visit counter (Abacus). Change namespace/key if you ever need a fresh count. */
+  visits: {
+    enabled: true,
+    namespace: "saurabhkawli-portfolio",
+    key: "visits",
+  },
 };

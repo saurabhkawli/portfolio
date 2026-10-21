@@ -288,9 +288,41 @@
     document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new Date().getFullYear(); });
   }
 
+  /* ---------- Visit counter (free Abacus API — no signup) ---------- */
+  function initVisits() {
+    const nodes = document.querySelectorAll("[data-visits]");
+    if (!nodes.length) return;
+    const cfg = (window.SITE_CONFIG && window.SITE_CONFIG.visits) || {};
+    if (cfg.enabled === false) {
+      document.querySelectorAll("[data-visits-wrap]").forEach((el) => { el.hidden = true; });
+      return;
+    }
+    const ns = encodeURIComponent(cfg.namespace || "saurabhkawli-portfolio");
+    const key = encodeURIComponent(cfg.key || "visits");
+    const base = "https://abacus.jasoncameron.dev";
+    let hit = true;
+    try {
+      if (sessionStorage.getItem("sk-visit")) hit = false;
+      else sessionStorage.setItem("sk-visit", "1");
+    } catch (e) { /* private mode — still count */ }
+    const url = `${base}/${hit ? "hit" : "get"}/${ns}/${key}`;
+    fetch(url)
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((data) => {
+        const n = Number(data && data.value);
+        if (!Number.isFinite(n)) return;
+        const text = n.toLocaleString();
+        nodes.forEach((el) => { el.textContent = text; });
+      })
+      .catch(() => {
+        document.querySelectorAll("[data-visits-wrap]").forEach((el) => { el.hidden = true; });
+      });
+  }
+
   /* ---------- Boot ---------- */
   initCursor();
   initSiteConfig();
+  initVisits();
   initChrome();
   arrive();
   initReveals();

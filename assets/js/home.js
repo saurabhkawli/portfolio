@@ -39,12 +39,14 @@
 
   /* ---------- Hero + intro ---------- */
   const intro = $("#intro");
+  const hero = $(".hero");
   const heroChars = $$("[data-hero-chars]").flatMap((el) => split(el, "chars"));
   const heroFades = $$("[data-hero-fade], .hero__top");
   if (anim) {
     gsap.set(heroChars, { yPercent: 115 });
     gsap.set(heroFades, { opacity: 0, y: 24 });
   }
+  if (hero) hero.classList.add("is-ready");
 
   function playHero(delay = 0) {
     if (!anim) return;
@@ -213,7 +215,6 @@
     const section = sky.closest(".comets");
     const skills = $$(".comets__list li", section).map((li) => li.textContent.trim());
     const hint = $("[data-comet-hint]", section);
-    if (hint && !SK.finePointer) hint.textContent = "Tap a comet to catch it";
     section.classList.add("is-flying");
 
     const small = window.innerWidth < 700;
@@ -244,6 +245,7 @@
     for (let i = 0; i < LANES; i++) LAYERS[[2, 0, 1][i % 3]].lanes.push(i);
 
     const spawn = (c, x, lane) => {
+      if (c.exploding) return;
       if (lane === undefined) {
         const free = c.layer.lanes.filter((i) => {
           const o = laneLast.get(c.layer.cls + i);
@@ -256,13 +258,71 @@
       laneLast.set(c.layer.cls + lane, c);
       c.label.textContent = skills[si++ % skills.length];
       c.el.dataset.hue = String(Math.floor(Math.random() * 3));
+      c.el.classList.remove("is-exploding", "is-caught");
       c.len = c.el.offsetWidth;
       c.ext = Math.max(c.len, c.label.offsetWidth + c.hs + 12);
       c.k = 0.85 + Math.random() * 0.3;
       c.x = x === undefined ? -10 - Math.random() * 140 : x;
       c.live = true;
+      c.exploding = false;
+      c.respawnAt = 0;
       c.el.style.visibility = "visible";
+      c.el.style.opacity = "";
     };
+
+    const explode = (c) => {
+      if (!c.live || c.exploding) return;
+      c.exploding = true;
+      c.live = false;
+      c.hover = false;
+      c.el.classList.add("is-exploding", "is-caught");
+
+      const head = c.el.querySelector(".comet__head");
+      const hr = head.getBoundingClientRect();
+      const sr = sky.getBoundingClientRect();
+      const ox = hr.left + hr.width / 2 - sr.left;
+      const oy = hr.top + hr.height / 2 - sr.top;
+      const glow = getComputedStyle(c.el).getPropertyValue("--glow").trim() || "rgba(255,178,107,0.8)";
+      const count = c.layer.cls === "is-near" ? 28 : c.layer.cls === "is-mid" ? 20 : 12;
+
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement("i");
+        p.className = `comet-burst${i % 3 === 0 ? " is-spark" : ""}`;
+        p.style.setProperty("--burst", glow);
+        p.style.left = `${ox}px`;
+        p.style.top = `${oy}px`;
+        sky.appendChild(p);
+        const ang = (Math.PI * 2 * i) / count + Math.random() * 0.4;
+        const dist = 40 + Math.random() * (c.layer.cls === "is-near" ? 120 : 80);
+        gsap.to(p, {
+          x: Math.cos(ang) * dist,
+          y: Math.sin(ang) * dist - 10 - Math.random() * 30,
+          scale: 0.15 + Math.random() * 0.5,
+          opacity: 0,
+          duration: 0.55 + Math.random() * 0.45,
+          ease: "power3.out",
+          onComplete: () => p.remove(),
+        });
+      }
+      const flash = document.createElement("i");
+      flash.className = "comet-burst";
+      flash.style.cssText = `left:${ox}px;top:${oy}px;width:18px;height:18px;margin:-9px 0 0 -9px;--burst:${glow}`;
+      sky.appendChild(flash);
+      gsap.fromTo(flash, { scale: 0.4, opacity: 1 }, {
+        scale: 4.5, opacity: 0, duration: 0.55, ease: "power2.out", onComplete: () => flash.remove(),
+      });
+
+      gsap.to(c.el, {
+        opacity: 0, duration: 0.2, ease: "power2.in",
+        onComplete: () => {
+          c.el.style.visibility = "hidden";
+          c.el.classList.remove("is-exploding", "is-caught");
+          c.respawnAt = performance.now() + 450 + Math.random() * 550;
+          c.exploding = false;
+        },
+      });
+    };
+
     const seed = () => {
       LAYERS.forEach((layer) => {
         const mine = comets.filter((c) => c.layer === layer);
@@ -278,13 +338,13 @@
       for (let i = 0; i < layer.n; i++) {
         const el = document.createElement("div");
         el.className = `comet ${layer.cls}`;
-        el.innerHTML = '<i class="comet__tail"></i><b class="comet__head"></b><span class="comet__label"></span>';
+        el.innerHTML = '<span class="comet__body"><i class="comet__tail"></i><i class="comet__dust" aria-hidden="true"></i><b class="comet__head"></b></span><span class="comet__label"></span>';
         sky.appendChild(el);
-        const c = { el, layer, label: el.lastChild, hs: 0, x: 0, lane: 0, len: 0, ext: 0, k: 1, mult: 1, hover: false, tapUntil: 0, live: false };
+        const c = { el, layer, label: el.querySelector(".comet__label"), hs: 0, x: 0, lane: 0, len: 0, ext: 0, k: 1, mult: 1, hover: false, live: false, exploding: false, respawnAt: 0 };
         c.hs = el.querySelector(".comet__head").offsetWidth || 6;
         el.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") c.hover = true; });
         el.addEventListener("pointerleave", () => { c.hover = false; });
-        el.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") c.tapUntil = performance.now() + 2200; });
+        el.addEventListener("click", (e) => { e.preventDefault(); explode(c); });
         comets.push(c);
       }
     });
@@ -300,8 +360,14 @@
       const boost = 1 + vel * 0.035;
       const now = performance.now();
       for (const c of comets) {
-        if (!c.live) { spawn(c); continue; }
-        const held = c.hover || now < c.tapUntil;
+        if (c.exploding) continue;
+        if (!c.live) {
+          if (c.respawnAt && now < c.respawnAt) continue;
+          c.respawnAt = 0;
+          spawn(c);
+          continue;
+        }
+        const held = c.hover;
         c.el.classList.toggle("is-caught", held);
         c.mult += ((held ? 0.03 : boost) - c.mult) * 0.08;
         c.x += c.layer.speed * c.k * c.mult * Math.min(dt, 64);

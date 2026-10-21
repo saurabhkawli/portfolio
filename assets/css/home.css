@@ -33,6 +33,10 @@ h2 em, h3 em { font-style: italic; color: var(--accent-soft); }
 .nav { transition: transform 0.6s var(--ease), background 0.4s, opacity 1s var(--ease); }
 .intro.is-done { display: none; }
 html.skip-intro .intro { display: none; }
+/* Keep hero masked until home.js / GSAP is ready (stops name FOUC through intro) */
+.js:not(.no-anim) .hero:not(.is-ready) .hero__title,
+.js:not(.no-anim) .hero:not(.is-ready) [data-hero-fade],
+.js:not(.no-anim) .hero:not(.is-ready) .hero__top { opacity: 0; }
 .intro__top, .intro__bottom {
   width: 100%; display: flex; justify-content: space-between; align-items: center;
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
@@ -195,35 +199,97 @@ html.skip-intro .intro { display: none; }
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
 }
 .comet {
-  --len: 260px; --hs: 9px; --th: 2px; --fs: clamp(30px, 3.4vw, 52px); --glow: rgba(255, 178, 107, 0.55);
+  --len: 320px; --hs: 14px; --th: 3px; --fs: clamp(30px, 3.4vw, 52px);
+  --glow: rgba(255, 178, 107, 0.7); --glow-soft: rgba(255, 200, 140, 0.35); --core: #fff8f0;
   position: absolute; left: 0; top: 0; margin-top: calc(var(--hs) / -2); display: flex; align-items: center;
-  transform-origin: right center; will-change: transform; visibility: hidden;
+  transform-origin: right center; will-change: transform; visibility: hidden; cursor: pointer;
 }
-.comet.is-mid { --len: 170px; --hs: 6px; --th: 1.5px; --fs: clamp(20px, 2vw, 30px); }
-.comet.is-far { --len: 100px; --hs: 4px; --th: 1px; --fs: 11px; }
-.comet[data-hue="1"] { --glow: rgba(139, 155, 255, 0.6); }
-.comet[data-hue="2"] { --glow: rgba(109, 255, 176, 0.5); }
+.comet.is-mid { --len: 200px; --hs: 9px; --th: 2px; --fs: clamp(20px, 2vw, 30px); }
+.comet.is-far { --len: 120px; --hs: 5px; --th: 1.2px; --fs: 11px; }
+.comet[data-hue="1"] { --glow: rgba(150, 170, 255, 0.75); --glow-soft: rgba(120, 150, 255, 0.35); --core: #f0f4ff; }
+.comet[data-hue="2"] { --glow: rgba(120, 255, 190, 0.65); --glow-soft: rgba(100, 240, 180, 0.3); --core: #f0fff8; }
+.comet__body { position: relative; display: flex; align-items: center; }
+/* Layered ion + dust tails */
 .comet__tail {
-  width: var(--len); height: var(--th); border-radius: 99px;
-  background: linear-gradient(90deg, rgba(255, 220, 180, 0), var(--glow) 60%, rgba(255, 244, 228, 0.95));
+  position: relative; width: var(--len); height: calc(var(--th) * 5); margin-right: calc(var(--hs) * -0.35);
+  filter: blur(0.2px);
+}
+.comet__tail::before, .comet__tail::after {
+  content: ""; position: absolute; right: 0; top: 50%; border-radius: 50%; pointer-events: none;
+  transform: translateY(-50%);
+}
+.comet__tail::before {
+  width: 100%; height: var(--th);
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 220, 180, 0.12) 35%,
+    var(--glow) 78%,
+    var(--core) 100%);
+  box-shadow: 0 0 10px var(--glow-soft);
+}
+.comet__tail::after {
+  width: 92%; height: calc(var(--th) * 3.2);
+  background: linear-gradient(90deg,
+    transparent 0%,
+    transparent 28%,
+    var(--glow-soft) 70%,
+    var(--glow) 100%);
+  filter: blur(3px); opacity: 0.85;
+}
+.comet__dust {
+  position: absolute; right: 0; top: 50%; width: var(--len); height: calc(var(--th) * 4.5);
+  transform: translateY(-50%); pointer-events: none; border-radius: 50%;
+  background:
+    radial-gradient(1.5px 1.5px at 92% 42%, rgba(255, 255, 255, 0.95), transparent 60%),
+    radial-gradient(1.2px 1.2px at 84% 58%, var(--glow), transparent 60%),
+    radial-gradient(1px 1px at 76% 38%, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(1.4px 1.4px at 68% 62%, var(--glow), transparent 60%),
+    radial-gradient(1px 1px at 58% 45%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(1.2px 1.2px at 48% 55%, var(--glow-soft), transparent 60%),
+    radial-gradient(1px 1px at 38% 40%, rgba(255, 255, 255, 0.4), transparent 60%),
+    radial-gradient(1px 1px at 28% 60%, var(--glow-soft), transparent 60%),
+    radial-gradient(0.8px 0.8px at 18% 48%, rgba(255, 255, 255, 0.28), transparent 60%);
+  opacity: 0.9; filter: blur(0.3px);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 40%, #000); mask-image: linear-gradient(90deg, transparent, #000 40%, #000);
 }
 .comet__head {
-  flex: none; width: var(--hs); height: var(--hs); margin-left: -1px; border-radius: 50%; background: #fff;
-  box-shadow: 0 0 8px 2px rgba(255, 244, 228, 0.9), 0 0 26px 8px var(--glow); transition: transform 0.5s var(--ease);
+  position: relative; z-index: 1; flex: none; width: var(--hs); height: var(--hs); border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0%, var(--core) 35%, var(--glow) 70%, transparent 78%);
+  box-shadow:
+    0 0 6px 2px rgba(255, 255, 255, 0.95),
+    0 0 18px 6px var(--glow),
+    0 0 42px 14px var(--glow-soft);
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+}
+.comet__head::after {
+  content: ""; position: absolute; inset: -140%; border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-soft) 0%, transparent 68%);
+  opacity: 0.7; pointer-events: none;
 }
 .comet__label {
-  position: absolute; right: calc(var(--hs) + 10px); bottom: calc(50% + 6px); white-space: nowrap; cursor: default;
+  position: absolute; right: calc(var(--hs) + 12px); bottom: calc(50% + 8px); white-space: nowrap;
   font-family: var(--font-display); font-size: var(--fs); line-height: 1; color: var(--ink);
-  transition: color 0.4s, text-shadow 0.4s, transform 0.5s var(--ease); transform-origin: right bottom;
+  transition: color 0.4s, text-shadow 0.4s, transform 0.5s var(--ease), opacity 0.35s; transform-origin: right bottom;
+  text-shadow: 0 0 18px color-mix(in srgb, var(--glow) 40%, transparent);
 }
 .comet.is-near:nth-child(even) .comet__label { font-style: italic; color: var(--accent-soft); }
-.comet.is-mid .comet__label { color: rgba(236, 232, 225, 0.72); }
-.comet.is-far { opacity: 0.6; }
-.comet.is-far .comet__label { font-family: var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); bottom: calc(50% + 4px); }
+.comet.is-mid .comet__label { color: rgba(236, 232, 225, 0.78); }
+.comet.is-far { opacity: 0.65; }
+.comet.is-far .comet__label { font-family: var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); bottom: calc(50% + 4px); text-shadow: none; }
 .comet.is-caught { z-index: 2; }
-.comet.is-caught .comet__head { transform: scale(1.8); }
-.comet.is-caught .comet__label { color: #fff; transform: scale(1.08); text-shadow: 0 0 24px var(--glow), 0 0 2px rgba(255, 255, 255, 0.6); }
+.comet.is-caught .comet__head { transform: scale(1.55); box-shadow: 0 0 10px 3px #fff, 0 0 28px 10px var(--glow), 0 0 60px 22px var(--glow-soft); }
+.comet.is-caught .comet__label { color: #fff; transform: scale(1.08); text-shadow: 0 0 28px var(--glow), 0 0 4px rgba(255, 255, 255, 0.7); }
 .comet.is-far.is-caught { opacity: 1; }
+.comet.is-exploding { pointer-events: none; z-index: 3; }
+.comet.is-exploding .comet__label { opacity: 0; transform: scale(1.2); }
+.comet.is-exploding .comet__body { opacity: 0; transition: opacity 0.15s; }
+/* Burst particles spawned on explode */
+.comet-burst {
+  position: absolute; left: 0; top: 0; width: 4px; height: 4px; margin: -2px 0 0 -2px; border-radius: 50%;
+  background: #fff; pointer-events: none; z-index: 4;
+  box-shadow: 0 0 6px 2px var(--burst, rgba(255, 200, 140, 0.9));
+}
+.comet-burst.is-spark { width: 2px; height: 2px; margin: -1px 0 0 -1px; border-radius: 1px; }
 
 /* ---------- Work ---------- */
 .work { padding: clamp(80px, 10vw, 120px) 0 0; }
