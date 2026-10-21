@@ -5,7 +5,7 @@
 window.SITE_CONFIG = {
   name: "Saurabh Kawli",
   email: "saurabhkawli05@gmail.com",
-  linkedin: "https://www.linkedin.com/in/your-linkedin-handle",
+  linkedin: "https://www.linkedin.com/in/saurabhkawli",
   github: "https://github.com/saurabhkawli",
   location: "India",
   /* Free visit counter (Abacus). Change namespace/key if you ever need a fresh count. */
